@@ -17,7 +17,7 @@ const dbURI = process.env.DB_URI || 'mongodb://localhost:27017/mern-shopping-lis
 //connect to Mongo
 mongoose
     .connect(dbURI)
-    .then(() => console.log('MongoDB Connected...'))
+    .then(() => console.log(`MongoDB Connected @${dbURI}...`))
     .catch(err => console.log(err));
 
 
