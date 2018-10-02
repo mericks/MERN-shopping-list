@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import {
-    Container,
     ListGroup,
     ListGroupItem,
     Button
@@ -27,17 +26,17 @@ class ShoppingList extends Component {
         const { items } = this.props.item;
 
         return (
-            <Container>
+            <div>
                 <ListGroup>
-                    <TransitionGroup className="shopping-list">
-                        {items.map(({ id, name}) => (
-                            <CSSTransition key={id} timeout={500} classNames="fade">
+                    <TransitionGroup>
+                        {items.map(({ _id, name}) => (
+                            <CSSTransition key={_id} timeout={500} classNames="fade">
                                 <ListGroupItem>
                                     <Button
                                         className="remove-btn"
                                         color="danger" 
                                         size="sm"
-                                        onClick={this.deleteItem.bind(this, id)}    
+                                        onClick={this.deleteItem.bind(this, _id)}    
                                     >&times;</Button>
                                     {name}
                                 </ListGroupItem>
@@ -45,7 +44,7 @@ class ShoppingList extends Component {
                         ))}
                     </TransitionGroup>
                 </ListGroup>
-            </Container>
+            </div>
         );
     }
 
