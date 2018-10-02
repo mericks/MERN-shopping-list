@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import {
-    Container,
     ListGroup,
     ListGroupItem,
     Button
@@ -27,9 +26,9 @@ class ShoppingList extends Component {
         const { items } = this.props.item;
 
         return (
-            <Container>
+            <div>
                 <ListGroup>
-                    <TransitionGroup className="shopping-list">
+                    <TransitionGroup>
                         {items.map(({ _id, name}) => (
                             <CSSTransition key={_id} timeout={500} classNames="fade">
                                 <ListGroupItem>
@@ -45,7 +44,7 @@ class ShoppingList extends Component {
                         ))}
                     </TransitionGroup>
                 </ListGroup>
-            </Container>
+            </div>
         );
     }
 
