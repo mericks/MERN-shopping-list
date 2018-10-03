@@ -11,15 +11,15 @@ app.use(express.json());
 
 
 // DB config
-const dbURI = process.env.DB_URI || 'mongodb://localhost:27017/mern-shopping-list';
+const dbURI = process.env.DB_URI || 'mongodb://localhost:27017/cheese-force';
 
 //connect to Mongo
 mongoose
-    .connect(dbURI)
+    .connect(dbURI, {useNewUrlParser: true})
     .then(() => console.log(`MongoDB Connected @${dbURI}...`))
     .catch(err => console.log(err));
 
-
+    
 // Use Routes
 app.use('/api/items', items);
 
