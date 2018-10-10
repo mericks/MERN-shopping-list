@@ -1,13 +1,13 @@
 {
   "name": "cheese-force",
   "version": "1.0.0",
-  "description": "Catalogue of different cheeses, built with MERN stack",
+  "description": "Catalogue of life-imbuing cheeses, built with MERN stack",
   "main": "server.js",
   "scripts": {
-    "client-install": "npm install --prefix client",
+    "client-install": "npm install --prefix ./client",
     "start": "node server.js",
     "server": "nodemon server.js",
-    "client": "npm start --prefix client",
+    "client": "npm start --prefix ./client",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
   },
@@ -15,8 +15,10 @@
   "license": "",
   "dependencies": {
     "concurrently": "^4.0.1",
+    "cors": "^2.8.4",
     "express": "^4.16.3",
     "mongoose": "^5.2.15",
+    "morgan": "^1.9.1",
     "tslint": "^5.11.0"
   },
   "devDependencies": {
