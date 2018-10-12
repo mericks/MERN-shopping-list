@@ -1,33 +1,38 @@
 import React, { Component } from 'react';
-import {
-    Button,
-    Modal,
-    ModalHeader,
-    ModalBody,
-    Form,
-    FormGroup,
-    Label,
-    Input
-} from 'reactstrap';
+import { Button, Modal, ModalHeader, ModalBody, Form, FormGroup, Label, Input } from 'reactstrap';
 import { connect } from 'react-redux';
 import { addItem } from '../actions/itemActions';
+import DisplaySearchResults from './DisplaySearchResults';
+import axios from 'axios';
 
 
 class ItemModal extends Component {
     state = {
         modal: false,
-        name: ''
+        name: '',
+        searchResults: []
     }
 
     toggle = () => {
         this.setState({
-            modal: !this.state.modal
+            modal: !this.state.modal,
+            searchResults: []
         });
     }
 
     onChange = e => {
         this.setState({ [e.target.name]: e.target.value });
+        if (this.state.name.length >= 2) {
+            this.getSearchResults();
+        };
     }
+ 
+    getSearchResults = () => {
+        axios
+            .get(`https://en.wikipedia.org/w/api.php?origin=*&action=opensearch&format=json&search=${this.state.name}`)
+            .then(res => this.setState({ searchResults: res.data[1]}));
+    }
+    
 
     onSubmit = e => {
         e.preventDefault();
@@ -68,13 +73,14 @@ class ItemModal extends Component {
                                     // placeholder=""
                                     onChange={this.onChange}
                                 ></Input>
-                                <Button
-                                    color="dark"
-                                    style={{marginTop: '2rem'}}
-                                    block
-                                >Too much cheese? Pffft. Add it!</Button>
+                            {/* <Button
+                                color="dark"
+                                style={{marginTop: '2rem'}}
+                                block
+                            >Too much cheese? Pffft. Add it!</Button> */}
                             </FormGroup>
                         </Form>
+                        <DisplaySearchResults {...this.props} searchResults={this.state.searchResults} />
                     </ModalBody>
                 </Modal>
             </div>
