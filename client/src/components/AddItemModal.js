@@ -10,7 +10,18 @@ class ItemModal extends Component {
     state = {
         modal: false,
         name: '',
-        searchResults: []
+        searchResults: [],
+        selectedItem: {
+            title: '',
+            description: '',
+            extract: '',
+            content_urls: {
+                desktop: '',
+                mobile: ''
+            },
+            thumbnail_src: '',
+            pageid: 0
+        }
     }
 
     toggle = () => {
@@ -29,24 +40,48 @@ class ItemModal extends Component {
  
     getSearchResults = () => {
         axios
+            // TODO: limit search response to 5 titles
+            // TODO: Limit search responses to items in cheese types category
             .get(`https://en.wikipedia.org/w/api.php?origin=*&action=opensearch&format=json&search=${this.state.name}`)
             .then(res => this.setState({ searchResults: res.data[1]}));
     }
     
-
-    onSubmit = e => {
-        e.preventDefault();
-
-        const newItem = {
-            name: this.state.name
-        }
-
-        // Add item via addItem action
-        this.props.addItem(newItem);
+    addSelectedItem = result => {
+        axios
+            .get(`https://en.wikipedia.org/api/rest_v1/page/summary/${result}`)
+            .then(res => this.setState({ selectedItem: {
+                title: res.data.title,
+                description: res.data.description,
+                extract: res.data.extract,
+                content_url: {
+                    desktop: res.data.content_urls.desktop.page,
+                    mobile: res.data.content_urls.mobile.page
+                },
+                thumbnail_src: res.data.thumbnail.source,
+                pageid: res.data.pageid
+            }}));
+            
+        // Add item to redux state via addItem action
+        this.props.addItem(this.state.selectedItem)
 
         // Close modal
         this.toggle();
+
     }
+
+    // onSubmit = e => {
+    //     e.preventDefault();
+
+    //     const newItem = {
+    //         name: this.state.name
+    //     }
+
+    //     // Add item via addItem action
+    //     this.props.addItem(newItem);
+
+    //     // Close modal
+    //     this.toggle();
+    // }
 
     render() {
         return (
@@ -80,7 +115,10 @@ class ItemModal extends Component {
                             >Too much cheese? Pffft. Add it!</Button> */}
                             </FormGroup>
                         </Form>
-                        <DisplaySearchResults {...this.props} searchResults={this.state.searchResults} />
+                        <DisplaySearchResults
+                            {...this.props}
+                            searchResults={this.state.searchResults}
+                            addSelectedItem={this.addSelectedItem} />
                     </ModalBody>
                 </Modal>
             </div>
