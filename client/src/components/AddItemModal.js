@@ -1,27 +1,23 @@
 import React, { Component } from 'react';
-import { Button, Modal, ModalHeader, ModalBody, Form, FormGroup, Label, Input } from 'reactstrap';
+import { Button, Modal, ModalHeader, ModalBody, Form } from 'reactstrap';
 import { connect } from 'react-redux';
 import { addItem } from '../actions/itemActions';
-import DisplaySearchResults from './DisplaySearchResults';
+import DisplaySearch from './DisplaySearch';
 import axios from 'axios';
 
 
-class ItemModal extends Component {
+class AddItemModal extends Component {
     state = {
         modal: false,
+
+        // Selected Item
         name: '',
-        searchResults: [],
-        selectedItem: {
-            title: '',
-            description: '',
-            extract: '',
-            content_urls: {
-                desktop: '',
-                mobile: ''
-            },
-            thumbnail_src: '',
-            pageid: 0
-        }
+        description: '',
+        extract: '',
+        desktop_url: '',
+        mobile_url: '',
+        thumbnail_src: '',
+        pageid: 0
     }
 
     toggle = () => {
@@ -30,60 +26,60 @@ class ItemModal extends Component {
             searchResults: []
         });
     }
-
-    onChange = e => {
-        this.setState({ [e.target.name]: e.target.value });
-        if (this.state.name.length >= 2) {
-            this.getSearchResults();
-        };
-    }
- 
-    getSearchResults = () => {
-        axios
-            // TODO: limit search response to 5 titles
-            // TODO: Limit search responses to items in cheese types category
-            .get(`https://en.wikipedia.org/w/api.php?origin=*&action=opensearch&format=json&search=${this.state.name}`)
-            .then(res => this.setState({ searchResults: res.data[1]}));
-    }
-    
+     
     addSelectedItem = result => {
         axios
             .get(`https://en.wikipedia.org/api/rest_v1/page/summary/${result}`)
-            .then(res => this.setState({ selectedItem: {
-                title: res.data.title,
+            .then(res => this.setState({ 
+                name: res.data.title,
                 description: res.data.description,
                 extract: res.data.extract,
-                content_url: {
-                    desktop: res.data.content_urls.desktop.page,
-                    mobile: res.data.content_urls.mobile.page
-                },
+                desktop_url: res.data.content_urls.desktop.page,
+                mobile_url: res.data.content_urls.mobile.page,
                 thumbnail_src: res.data.thumbnail.source,
                 pageid: res.data.pageid
-            }}));
-            
+            }));
+    }
+
+    onSubmit = e => {
+        e.preventDefault();
+
+        const selectedItemPayload = {
+            name: this.state.name,
+            description: this.state.description,
+            extract: this.state.extract,
+            desktop_url: this.state.desktop_url,
+            mobile_url: this.state.mobile_url,
+            thumbnail_src: this.state.thumbnail_src,
+            pageid: this.state.pageid
+        };
+
         // Add item to redux state via addItem action
-        this.props.addItem(this.state.selectedItem)
+        this.props.addItem(selectedItemPayload);
 
         // Close modal
         this.toggle();
-
     }
 
-    // onSubmit = e => {
-    //     e.preventDefault();
-
-    //     const newItem = {
-    //         name: this.state.name
-    //     }
-
-    //     // Add item via addItem action
-    //     this.props.addItem(newItem);
-
-    //     // Close modal
-    //     this.toggle();
-    // }
-
     render() {
+
+        const DisplayOptions = () => {
+            if (this.state.name.length === 0) {
+                return (
+                    <DisplaySearch 
+                        {...this.props}
+                        addSelectedItem={this.addSelectedItem} />
+                );
+            } else {
+                return (
+                    <div>
+                        <h3>{this.state.name}</h3>
+                        <p>{this.state.description}</p>
+                    </div>
+                );
+            }
+        }
+
         return (
             <div>
                 <Button
@@ -99,26 +95,13 @@ class ItemModal extends Component {
                     <ModalHeader toggle={this.toggle}>Increase Your Cheese Force</ModalHeader>
                     <ModalBody>
                         <Form onSubmit={this.onSubmit}>
-                            <FormGroup>
-                                <Label for="item">Which cheese shall we add?</Label>
-                                <Input
-                                    type="text"
-                                    name="name"
-                                    id="item"
-                                    // placeholder=""
-                                    onChange={this.onChange}
-                                ></Input>
-                            {/* <Button
+                            <DisplayOptions />
+                            <Button
                                 color="dark"
                                 style={{marginTop: '2rem'}}
                                 block
-                            >Too much cheese? Pffft. Add it!</Button> */}
-                            </FormGroup>
+                            >Too much cheese? Pffft. Add it!</Button>
                         </Form>
-                        <DisplaySearchResults
-                            {...this.props}
-                            searchResults={this.state.searchResults}
-                            addSelectedItem={this.addSelectedItem} />
                     </ModalBody>
                 </Modal>
             </div>
@@ -130,4 +113,4 @@ const mapStateToProps = state => ({
     item: state.item
 });
 
-export default connect(mapStateToProps, { addItem })(ItemModal)
+export default connect(mapStateToProps, { addItem })(AddItemModal)
