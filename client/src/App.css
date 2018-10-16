@@ -19,3 +19,9 @@
     opacity: 0.01;
     transition: opacity 1000ms ease-in;
 }
+
+.thumbnail {
+    height: 100px;
+    width: 100px;
+    margin-bottom: 1rem;
+}
