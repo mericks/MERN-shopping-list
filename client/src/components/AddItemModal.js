@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { Button, Modal, ModalHeader, ModalBody, Form } from 'reactstrap';
+import { Button, Modal, ModalHeader, ModalBody } from 'reactstrap';
 import { connect } from 'react-redux';
 import { addItem } from '../actions/itemActions';
 import DisplaySearch from './DisplaySearch';
+import DisplaySearchResult from './DisplaySearchResult';
 import axios from 'axios';
 
 
@@ -10,7 +11,6 @@ class AddItemModal extends Component {
     state = {
         modal: false,
 
-        // Selected Item
         name: '',
         description: '',
         extract: '',
@@ -41,7 +41,7 @@ class AddItemModal extends Component {
             }));
     }
 
-    onSubmit = e => {
+    handleSubmit = e => {
         e.preventDefault();
 
         const selectedItemPayload = {
@@ -72,10 +72,13 @@ class AddItemModal extends Component {
                 );
             } else {
                 return (
-                    <div>
-                        <h3>{this.state.name}</h3>
-                        <p>{this.state.description}</p>
-                    </div>
+                    <DisplaySearchResult
+                        {...this.props}
+                        name={this.state.name}
+                        description={this.state.description}
+                        thumbnail_src={this.state.thumbnail_src}
+                        toggle={this.toggle}
+                        handleSubmit={this.handleSubmit} />
                 );
             }
         }
@@ -94,14 +97,7 @@ class AddItemModal extends Component {
                 >
                     <ModalHeader toggle={this.toggle}>Increase Your Cheese Force</ModalHeader>
                     <ModalBody>
-                        <Form onSubmit={this.onSubmit}>
-                            <DisplayOptions />
-                            <Button
-                                color="dark"
-                                style={{marginTop: '2rem'}}
-                                block
-                            >Too much cheese? Pffft. Add it!</Button>
-                        </Form>
+                        <DisplayOptions />
                     </ModalBody>
                 </Modal>
             </div>
