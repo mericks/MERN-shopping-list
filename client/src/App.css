@@ -21,7 +21,15 @@
 }
 
 .thumbnail {
-    height: 100px;
-    width: 100px;
-    margin-bottom: 1rem;
+    height: 120px;
+    width: 120px;
+    object-fit: cover;
+    margin-right: 2rem;
+
+}
+
+.card-image {
+    height: 180px;
+    width: 256px;
+    object-fit: cover;
 }
