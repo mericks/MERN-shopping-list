@@ -1,59 +1,93 @@
 import React, { Component } from 'react';
-import { Button, Modal, ModalHeader, ModalBody, Form, FormGroup, Label, Input } from 'reactstrap';
+import { Button, Modal, ModalHeader, ModalBody } from 'reactstrap';
 import { connect } from 'react-redux';
 import { addItem } from '../actions/itemActions';
-import DisplaySearchResults from './DisplaySearchResults';
+import DisplaySearch from './DisplaySearch';
+import DisplaySearchResult from './DisplaySearchResult';
 import axios from 'axios';
 
 
-class ItemModal extends Component {
+class AddItemModal extends Component {
     state = {
         modal: false,
+
         name: '',
-        searchResults: []
+        description: '',
+        extract: '',
+        desktop_url: '',
+        mobile_url: '',
+        thumbnail_url: '',
+        pageid: 0
     }
 
     toggle = () => {
         this.setState({
             modal: !this.state.modal,
-            searchResults: []
+            name: ''
         });
     }
-
-    onChange = e => {
-        this.setState({ [e.target.name]: e.target.value });
-        if (this.state.name.length >= 2) {
-            this.getSearchResults();
-        };
-    }
- 
-    getSearchResults = () => {
+     
+    addSelectedItem = result => {
         axios
-            .get(`https://en.wikipedia.org/w/api.php?origin=*&action=opensearch&format=json&search=${this.state.name}`)
-            .then(res => this.setState({ searchResults: res.data[1]}));
+            .get(`https://en.wikipedia.org/api/rest_v1/page/summary/${result}`)
+            .then(res => this.setState({ 
+                name: res.data.title,
+                description: res.data.description,
+                extract: res.data.extract,
+                desktop_url: res.data.content_urls.desktop.page,
+                mobile_url: res.data.content_urls.mobile.page,
+                thumbnail_url: res.data.thumbnail.source,
+                pageid: res.data.pageid
+            }));
     }
-    
 
-    onSubmit = e => {
+    handleSubmit = e => {
         e.preventDefault();
 
-        const newItem = {
-            name: this.state.name
-        }
+        const selectedItemPayload = {
+            name: this.state.name,
+            description: this.state.description,
+            extract: this.state.extract,
+            desktop_url: this.state.desktop_url,
+            mobile_url: this.state.mobile_url,
+            thumbnail_url: this.state.thumbnail_url,
+            pageid: this.state.pageid
+        };
 
-        // Add item via addItem action
-        this.props.addItem(newItem);
+        // Add item to redux state via addItem action
+        this.props.addItem(selectedItemPayload);
 
         // Close modal
         this.toggle();
     }
 
     render() {
+
+        const DisplayOptions = () => {
+            if (this.state.name.length === 0) {
+                return (
+                    <DisplaySearch 
+                        {...this.props}
+                        addSelectedItem={this.addSelectedItem} />
+                );
+            } else {
+                return (
+                    <DisplaySearchResult
+                        {...this.props}
+                        name={this.state.name}
+                        description={this.state.description}
+                        thumbnail_url={this.state.thumbnail_url}
+                        toggle={this.toggle}
+                        handleSubmit={this.handleSubmit} />
+                );
+            }
+        }
+
         return (
             <div>
+                
                 <Button
                     color="dark"
-                    style={{marginTop: '2rem'}}
                     onClick={this.toggle}
                 >Increase Your Cheese Force</Button>
 
@@ -63,24 +97,7 @@ class ItemModal extends Component {
                 >
                     <ModalHeader toggle={this.toggle}>Increase Your Cheese Force</ModalHeader>
                     <ModalBody>
-                        <Form onSubmit={this.onSubmit}>
-                            <FormGroup>
-                                <Label for="item">Which cheese shall we add?</Label>
-                                <Input
-                                    type="text"
-                                    name="name"
-                                    id="item"
-                                    // placeholder=""
-                                    onChange={this.onChange}
-                                ></Input>
-                            {/* <Button
-                                color="dark"
-                                style={{marginTop: '2rem'}}
-                                block
-                            >Too much cheese? Pffft. Add it!</Button> */}
-                            </FormGroup>
-                        </Form>
-                        <DisplaySearchResults {...this.props} searchResults={this.state.searchResults} />
+                        <DisplayOptions />
                     </ModalBody>
                 </Modal>
             </div>
@@ -92,4 +109,4 @@ const mapStateToProps = state => ({
     item: state.item
 });
 
-export default connect(mapStateToProps, { addItem })(ItemModal)
+export default connect(mapStateToProps, { addItem })(AddItemModal)

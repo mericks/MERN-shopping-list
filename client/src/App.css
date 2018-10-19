@@ -19,3 +19,17 @@
     opacity: 0.01;
     transition: opacity 1000ms ease-in;
 }
+
+.thumbnail {
+    height: 120px;
+    width: 120px;
+    object-fit: cover;
+    margin-right: 2rem;
+
+}
+
+.card-image {
+    height: 180px;
+    width: 256px;
+    object-fit: cover;
+}
