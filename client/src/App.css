@@ -33,3 +33,14 @@
     width: 256px;
     object-fit: cover;
 }
+
+.icon {
+    height: 30px;
+    width: 30px;
+    fill: white;
+    margin-left: 0.5rem;
+}
+
+.icon:hover {
+    fill: yellow;
+}
