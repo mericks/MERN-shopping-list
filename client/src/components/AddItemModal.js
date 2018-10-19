@@ -16,7 +16,7 @@ class AddItemModal extends Component {
         extract: '',
         desktop_url: '',
         mobile_url: '',
-        thumbnail_src: '',
+        thumbnail_url: '',
         pageid: 0
     }
 
@@ -36,7 +36,7 @@ class AddItemModal extends Component {
                 extract: res.data.extract,
                 desktop_url: res.data.content_urls.desktop.page,
                 mobile_url: res.data.content_urls.mobile.page,
-                thumbnail_src: res.data.thumbnail.source,
+                thumbnail_url: res.data.thumbnail.source,
                 pageid: res.data.pageid
             }));
     }
@@ -50,7 +50,7 @@ class AddItemModal extends Component {
             extract: this.state.extract,
             desktop_url: this.state.desktop_url,
             mobile_url: this.state.mobile_url,
-            thumbnail_src: this.state.thumbnail_src,
+            thumbnail_url: this.state.thumbnail_url,
             pageid: this.state.pageid
         };
 
@@ -76,7 +76,7 @@ class AddItemModal extends Component {
                         {...this.props}
                         name={this.state.name}
                         description={this.state.description}
-                        thumbnail_src={this.state.thumbnail_src}
+                        thumbnail_url={this.state.thumbnail_url}
                         toggle={this.toggle}
                         handleSubmit={this.handleSubmit} />
                 );
@@ -85,9 +85,9 @@ class AddItemModal extends Component {
 
         return (
             <div>
+                
                 <Button
                     color="dark"
-                    style={{marginTop: '2rem'}}
                     onClick={this.toggle}
                 >Increase Your Cheese Force</Button>
 
