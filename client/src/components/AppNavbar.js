@@ -1,14 +1,7 @@
 import React, { Component } from 'react';
-import {
-    Collapse,
-    Navbar,
-    NavbarToggler,
-    NavbarBrand,
-    Nav,
-    NavItem,
-    NavLink,
-    Container
-} from 'reactstrap';
+import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink, Container } from 'reactstrap';
+import AddItemModal from './AddItemModal';
+
 
 class AppNavbar extends Component {
     // ** Don't need constructor since not binding custom methods to 'this'. **
@@ -17,10 +10,10 @@ class AppNavbar extends Component {
     state = {
         isOpen: false
     }
-    // ** Using arrow function workaroundl to avoid needing to bind 'this' **
+    // ** Using arrow function rather than binding 'this' manually **
     // this.toggle = this.toggle.bind(this);)
 
-    // Arrow function workaround to avoid needing to bind each custom method.
+    // ** Using arrow function rather than binding 'this' manually **
     toggle = () => {
         this.setState({
             isOpen: !this.state.isOpen
@@ -36,6 +29,9 @@ class AppNavbar extends Component {
                         <NavbarToggler onClick={this.toggle} />
                         <Collapse isOpen={this.state.isOpen} navbar>
                             <Nav className="ml-auto" navbar>
+                                <NavItem>
+                                    <AddItemModal />
+                                </NavItem>
                                 <NavItem>
                                     <NavLink href="https://github.com/mericks/cheese-force_MERNFullStack" target="_blank">Source Code</NavLink>
                                 </NavItem>
