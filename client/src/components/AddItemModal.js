@@ -85,11 +85,12 @@ class AddItemModal extends Component {
 
         return (
             <div>
+                  <Button className="add-btn"
+                    // color="secondary"
+                    onClick={this.toggle} >
+                    Increase Your Cheese Force
+                </Button>
                 
-                <Button
-                    color="dark"
-                    onClick={this.toggle}
-                >Increase Your Cheese Force</Button>
 
                 <Modal
                     isOpen={this.state.modal}
