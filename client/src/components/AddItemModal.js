@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { Button, Modal, ModalHeader, ModalBody } from 'reactstrap';
 import { connect } from 'react-redux';
 import { addItem } from '../actions/itemActions';
-import DisplaySearch from './DisplaySearch';
-import DisplaySearchResult from './DisplaySearchResult';
+import SearchDisplay from './SearchDisplay';
+import SearchResultDisplay from './SearchResultDisplay';
 import axios from 'axios';
 
 
@@ -66,13 +66,13 @@ class AddItemModal extends Component {
         const DisplayOptions = () => {
             if (this.state.name.length === 0) {
                 return (
-                    <DisplaySearch 
+                    <SearchDisplay
                         {...this.props}
                         addSelectedItem={this.addSelectedItem} />
                 );
             } else {
                 return (
-                    <DisplaySearchResult
+                    <SearchResultDisplay
                         {...this.props}
                         name={this.state.name}
                         description={this.state.description}
@@ -84,18 +84,18 @@ class AddItemModal extends Component {
         }
 
         return (
-            <div>
-                
-                <Button
-                    color="dark"
-                    onClick={this.toggle}
-                >Increase Your Cheese Force</Button>
+            <div className="text-center">
+                <Button className="add-btn" size="lg"
+                    color="secondary"
+                    onClick={this.toggle} >
+                    Increase Your Cheese IQ
+                </Button>
 
                 <Modal
                     isOpen={this.state.modal}
                     toggle={this.toggle}
                 >
-                    <ModalHeader toggle={this.toggle}>Increase Your Cheese Force</ModalHeader>
+                    <ModalHeader toggle={this.toggle}>Increase Your Cheese IQ</ModalHeader>
                     <ModalBody>
                         <DisplayOptions />
                     </ModalBody>
