@@ -7,12 +7,10 @@ class Home extends Component {
 
     render() {
         return (
-            <div>
+            <div className="bg-dark">
                 <Jumbotron className="jumbo-image clearfix" >
                     <div className="title clearfix float-right">
-                        <h1>Cheese</h1>
-                        <h1>Force</h1>
-                        <p>Life-Embuing Curdled Milk</p>
+                        <h1 className="display-2">CHEESE<br /> IQ</h1>
                     </div>
                 </Jumbotron>
                 <AddItemModal />

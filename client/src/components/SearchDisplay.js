@@ -3,7 +3,7 @@ import { FormGroup, Label, Input, ButtonGroup, Button } from 'reactstrap';
 import axios from 'axios';
 
 
-class DisplaySearch extends Component {
+class SearchDisplay extends Component {
     state = {
         inputName: '',
         searchResults: []
@@ -18,10 +18,9 @@ class DisplaySearch extends Component {
     
     getSearchResults = () => {
         axios
-            // TODO: limit search response to 5 titles
             // TODO: Check to see if can do verification of cheese field if not category search limitation
             // TODO: Limit search responses to items in cheese types category
-            .get(`https://en.wikipedia.org/w/api.php?origin=*&action=opensearch&format=json&search=${this.state.inputName}`)
+            .get(`https://en.wikipedia.org/w/api.php?origin=*&action=opensearch&format=json&search=${this.state.inputName}&limit=5`)
             .then(res => this.setState({ searchResults: res.data[1]}));
     }
     
@@ -29,7 +28,9 @@ class DisplaySearch extends Component {
     render() {
 
         const listResults = this.state.searchResults.map((result, index) =>
-            <Button key={index} color="warning" onClick={() => this.props.addSelectedItem(result)} block>
+            <Button className="search-results"
+                key={index}
+                onClick={() => this.props.addSelectedItem(result)}>
                 {result}
             </Button>
         );
@@ -56,4 +57,4 @@ class DisplaySearch extends Component {
     
 }
 
-export default DisplaySearch;
+export default SearchDisplay;

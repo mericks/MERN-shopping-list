@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink, Container } from 'reactstrap';
-import About from './About';
 
 
 class AppNavbar extends Component {
@@ -30,9 +29,6 @@ class AppNavbar extends Component {
                         <NavbarToggler onClick={this.toggle} />
                         <Collapse isOpen={this.state.isOpen} navbar>
                             <Nav className="ml-auto" navbar>
-                                {/* <NavItem>
-                                    <About />
-                                </NavItem> */}
                                 <NavItem>
                                     <NavLink href="https://github.com/mericks/cheese-force_MERNFullStack" target="_blank">Source Code</NavLink>
                                 </NavItem>

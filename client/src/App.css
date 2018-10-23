@@ -8,28 +8,87 @@
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 body {
     font-family: 'Roboto', sans-serif;
-    /* font-family: 'Cormorant', serif; */
     background-color: "secondary";
-
 }
 
 .title {
     font-family: 'Cormorant', serif;
-    text-transform: capitalize;
-    line-height: 6rem;
+    font-weight: 600;
     text-align: center;
-    font-size: 4rem; 
-    font-weight: bold;
     color: #f8d568;
-    margin-right: 5rem;
+    margin-right: 3rem;
     margin-bottom: 0rem;  
+    text-shadow: 4px 4px 8px darkslategray;
 }
 
-.title p {
-    font-family: 'Roboto', sans-serif;
-    font-size: 1rem;
+.card-title {
+    font-family: 'Cormorant', serif;
+    font-weight: 600;
+    color: #f8d568;
+    text-align: center;
+    background-color: "secondary";
 }
 
+/* Images
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+/* .navbar-image {
+    height: auto;
+    width: auto;
+} */
+
+.jumbo-image {
+    background-image: url("./assets/cheeseBackground.jpg");
+    border-radius: 0rem;
+    object-fit: cover;
+}
+
+.card-image {
+    height: 200px;
+    object-fit: cover;
+}
+
+.thumbnail {
+    height: 150px;
+    width: 150px;
+    object-fit: cover;
+    margin-right: 2rem;
+}
+
+/* Buttons
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+.remove-btn {
+    margin-top: 2rem;
+    margin-right: 0.5rem;
+    margin-bottom: 1rem;
+    display: block;
+}
+
+.add-btn {
+    /* padding: 0.75rem; */
+    width: 80%;
+    margin-bottom: 4rem;
+    /* border-top-left-radius: 0%;
+    border-top-right-radius: 0%; */
+    box-shadow: 0 0.75px 2.5px 0 whitesmoke;
+    text-shadow: .5px .5px 1px darkslategray;
+}
+
+.add-btn:hover {
+    background-color:#f8d568; 
+    color: black;
+    text-shadow: 0px;
+    box-shadow: 0 0.75px 2.5px 0 darkslategray;
+}
+
+.search-results {
+    width: 100%;
+    border: 0rem;
+}
+
+.search-results:hover {
+    background-color:#f8d568; 
+    color: black;
+}
 
 /* Transitions
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
@@ -49,45 +108,4 @@ body {
 .fade-exit-active {
     opacity: 0.01;
     transition: opacity 1000ms ease-in;
-}
-
-/* Images
-–––––––––––––––––––––––––––––––––––––––––––––––––– */
-/* .navbar-image {
-    height: auto;
-    width: auto;
-} */
-
-.jumbo-image {
-    background-image: url("./assets/cheeseBackground.jpg");
-    margin-bottom: 0rem;
-    border-radius: 0rem;
-    /* object-fit: cover; */
-}
-
-.card-image {
-    height: 180px;
-    object-fit: cover;
-}
-
-.thumbnail {
-    height: 120px;
-    width: 120px;
-    object-fit: cover;
-    margin-right: 2rem;
-}
-
-/* Buttons
-–––––––––––––––––––––––––––––––––––––––––––––––––– */
-.remove-btn {
-    margin-right: 0.5rem;
-}
-
-.add-btn {
-    width: 100%;
-    padding: 1rem;
-    margin-bottom: 5rem;
-    background-color: "secondary";
-    border-top-left-radius: 0%;
-    border-top-right-radius: 0%;
 }
