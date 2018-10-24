@@ -8,7 +8,10 @@
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 body {
     font-family: 'Roboto', sans-serif;
-    background-color: "secondary";
+}
+
+#home {
+    background-image: url("./assets/background2.jpg");
 }
 
 .title {
@@ -26,20 +29,15 @@ body {
     font-weight: 600;
     color: #f8d568;
     text-align: center;
-    background-color: "secondary";
 }
 
 /* Images
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
-/* .navbar-image {
-    height: auto;
-    width: auto;
-} */
-
 .jumbo-image {
     background-image: url("./assets/cheeseBackground.jpg");
     border-radius: 0rem;
     object-fit: cover;
+    /* border-bottom: 0.2rem solid; */
 }
 
 .card-image {
@@ -64,12 +62,11 @@ body {
 }
 
 .add-btn {
-    /* padding: 0.75rem; */
-    width: 80%;
+    padding: 0.75rem;
+    width: 100%;
     margin-bottom: 4rem;
-    /* border-top-left-radius: 0%;
-    border-top-right-radius: 0%; */
-    box-shadow: 0 0.75px 2.5px 0 whitesmoke;
+    border-radius: 0%;
+    box-shadow: 0 1.5px 5px 0 black;
     text-shadow: .5px .5px 1px darkslategray;
 }
 

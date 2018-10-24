@@ -31,10 +31,7 @@ class AppNavbar extends Component {
                             <Nav className="ml-auto" navbar>
                                 <NavItem>
                                     <NavLink href="https://github.com/mericks/cheese-force_MERNFullStack" target="_blank">
-                                        <img
-                                            className="icon"
-                                            src="https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/github.svg"
-                                            alt="Source Code" />
+                                        Source Code
                                     </NavLink>
                                 </NavItem>
                             </Nav>
