@@ -7,8 +7,8 @@ class Home extends Component {
 
     render() {
         return (
-            <div className="bg-dark">
-                <Jumbotron className="jumbo-image clearfix" >
+            <div id="home">
+                <Jumbotron className="jumbo-image clearfix mb-0">
                     <div className="title clearfix float-right">
                         <h1 className="display-2">CHEESE<br /> IQ</h1>
                     </div>

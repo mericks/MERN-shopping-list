@@ -33,7 +33,7 @@ class Cards extends Component {
             <CSSTransition key={item._id} timeout={500} classNames="fade">
                 <Col sm="4"> 
                     <Card className="mb-5 bg-dark border-0">
-                        <CardHeader tag="h3" className="card-title bg-secondary rounded-top">{item.name}</CardHeader>
+                        <CardHeader tag="h3" className="card-title bg-dark rounded-top">{item.name}</CardHeader>
                         <CardImg top width="100%" className="rounded-bottom card-image" src={item.thumbnail_url} alt={item.name} />
                         <CardBody className="clearfix">
                             <Button className="float-left" outline color="danger"
