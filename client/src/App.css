@@ -10,10 +10,6 @@ body {
     font-family: 'Roboto', sans-serif;
 }
 
-#home {
-    background-image: url("./assets/background2.jpg");
-}
-
 .title {
     font-family: 'Cormorant', serif;
     font-weight: 600;
@@ -64,7 +60,7 @@ body {
 .add-btn {
     padding: 0.75rem;
     width: 100%;
-    margin-bottom: 4rem;
+    margin-bottom: 3rem;
     border-radius: 0%;
     box-shadow: 0 1.5px 5px 0 black;
     text-shadow: .5px .5px 1px darkslategray;
