@@ -6,7 +6,7 @@ Deployment site: https://cheese-iq.herokuapp.com/
 
 Built with the MERN stack, Redux for state management, and Reactstrap and react-transition-group for styling.
 
-I worked on this app in order to practice implementation of Redux. I added the Wikipedia call in order to have some quick content and decided to work with axios rather than fetch to gain additional experience. Likewise, use of the reactstrap library was based on my desire for experience and exposure.
+I worked on this app in order to practice implementation of Redux. I added the Wikipedia call in order to have some quick content and decided to work with axios rather than fetch to gain additional experience. Likewise, use of the reactstrap library was based on a desire for experience and exposure.
 
 ## Quick Start
 
