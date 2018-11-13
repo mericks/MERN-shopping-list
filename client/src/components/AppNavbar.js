@@ -1,6 +1,14 @@
 import React, { Component } from 'react';
-import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink, Container } from 'reactstrap';
-
+import {
+    Collapse,
+    Navbar,
+    NavbarToggler,
+    NavbarBrand,
+    Nav,
+    NavItem,
+    NavLink,
+    Container
+} from 'reactstrap';
 
 class AppNavbar extends Component {
     // ** Don't need constructor since not binding custom methods to 'this'. **
@@ -8,7 +16,7 @@ class AppNavbar extends Component {
     //     super(props);
     state = {
         isOpen: false
-    }
+    };
     // ** Using arrow function rather than binding 'this' manually **
     // this.toggle = this.toggle.bind(this);)
 
@@ -17,20 +25,23 @@ class AppNavbar extends Component {
         this.setState({
             isOpen: !this.state.isOpen
         });
-    }
+    };
 
-    render () {
+    render() {
         return (
             <div>
                 <Navbar color="dark" dark expand="sm">
                     <Container>
                         {/* <img class="navbar-image" src="../assets/cheeseBackground.jpg" alt="Cheese Force" href="/" /> */}
-                        <NavbarBrand href="/">Cheese Force</NavbarBrand>
+                        <NavbarBrand href="/">Cheese IQ</NavbarBrand>
                         <NavbarToggler onClick={this.toggle} />
                         <Collapse isOpen={this.state.isOpen} navbar>
                             <Nav className="ml-auto" navbar>
                                 <NavItem>
-                                    <NavLink href="https://github.com/mericks/cheese-force_MERNFullStack" target="_blank">
+                                    <NavLink
+                                        href="https://github.com/mericks/cheese-force_MERNFullStack"
+                                        target="_blank"
+                                    >
                                         Source Code
                                     </NavLink>
                                 </NavItem>
@@ -44,4 +55,3 @@ class AppNavbar extends Component {
 }
 
 export default AppNavbar;
-
